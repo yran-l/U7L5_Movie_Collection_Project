@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class MovieCollection
 {
@@ -277,7 +278,59 @@ public class MovieCollection
 
     private void listGenres()
     {
+        // put all genres into a string
+        String temp = "";
+        for (int i = 0;i < movies.size(); i++){
+            temp += movies.get(i).getGenres() + "|";
+        }
+        String[] temp2 = temp.split("\\|");
+        ArrayList<String> genres = new ArrayList<String>(Arrays.asList(temp2));
+        for (int i = 0; i < genres.size(); i++) {
+            for (int k = i + 1; k < genres.size(); k++) {
+                if (genres.get(i).equals(genres.get(k))) {
+                    genres.remove(k);
+                    k--;
+                }
+            }
+        }
 
+        Collections.sort(genres);
+        for (int i = 0;i < genres.size();i++){
+            System.out.println(i+1 + ". " + genres.get(i));
+        }
+        System.out.print("Choose a genre: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        ArrayList<Movie> results = new ArrayList<Movie>();
+        int choiceNum = 0;
+        // search through ALL movies in collection
+        for (int i = 0; i < movies.size(); i++)
+        {
+            if (movies.get(i).getGenres().contains(genres.get(choice-1))){
+                results.add(movies.get(i));
+            }
+        }
+        sortResults(results);
+        for (int i = 0;i < results.size();i++){
+            String title = results.get(i).getTitle();
+            // this will print index 0 as choice 1 in the results list; better for user!
+            choiceNum++;
+            System.out.println("" + choiceNum + ". " + title);
+        }
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        choice = scanner.nextInt();
+        scanner.nextLine();
+
+        Movie selectedMovie = results.get(choice - 1);
+
+        displayMovieInfo(selectedMovie);
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
     }
 
     private void listHighestRated()
