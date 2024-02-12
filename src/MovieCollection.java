@@ -335,12 +335,76 @@ public class MovieCollection
 
     private void listHighestRated()
     {
+        ArrayList<Movie> top50 = new ArrayList<Movie>();
+        double max = 0;
+        int highestIdx = 0;
+        for (int i = 0; i < 51; i ++){
+            for (int j = 0; j < movies.size();j++){
+                if (movies.get(j).getUserRating() > max){
+                    max = movies.get(j).getUserRating();
+                    highestIdx = j;
+                }
+            }
+            top50.add(movies.get(highestIdx));
+            movies.remove(highestIdx);
+            max = 0;
+        }
+        int choiceNum = 0;
+        for (int i = 0;i < top50.size();i++){
+            String title = top50.get(i).getTitle();
+            // this will print index 0 as choice 1 in the results list; better for user!
+            choiceNum++;
+            System.out.println("" + choiceNum + ". " + title);
+        }
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
 
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        Movie selectedMovie = top50.get(choice - 1);
+
+        displayMovieInfo(selectedMovie);
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
     }
 
     private void listHighestRevenue()
     {
+        ArrayList<Movie> top50 = new ArrayList<Movie>();
+        int max = 0;
+        int highestIdx = 0;
+        for (int i = 0; i < 51; i ++){
+            for (int j = 0; j < movies.size();j++){
+                if (movies.get(j).getRevenue() > max){
+                    max = movies.get(j).getRevenue();
+                    highestIdx = j;
+                }
+            }
+            top50.add(movies.get(highestIdx));
+            movies.remove(highestIdx);
+            max = 0;
+        }
+        int choiceNum = 0;
+        for (int i = 0;i < top50.size();i++){
+            String title = top50.get(i).getTitle();
+            // this will print index 0 as choice 1 in the results list; better for user!
+            choiceNum++;
+            System.out.println("" + choiceNum + ". " + title);
+        }
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
 
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        Movie selectedMovie = top50.get(choice - 1);
+
+        displayMovieInfo(selectedMovie);
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
     }
 
     private void importMovieList(String fileName)
