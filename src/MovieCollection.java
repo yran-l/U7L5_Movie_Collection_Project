@@ -354,7 +354,7 @@ public class MovieCollection
             String title = top50.get(i).getTitle();
             // this will print index 0 as choice 1 in the results list; better for user!
             choiceNum++;
-            System.out.println("" + choiceNum + ". " + title);
+            System.out.println("" + choiceNum + ". " + title + " " + top50.get(i).getUserRating());
         }
         System.out.println("Which movie would you like to learn more about?");
         System.out.print("Enter number: ");
@@ -391,7 +391,7 @@ public class MovieCollection
             String title = top50.get(i).getTitle();
             // this will print index 0 as choice 1 in the results list; better for user!
             choiceNum++;
-            System.out.println("" + choiceNum + ". " + title);
+            System.out.println("" + choiceNum + ". " + title + " " + top50.get(i).getRevenue());
         }
         System.out.println("Which movie would you like to learn more about?");
         System.out.print("Enter number: ");
